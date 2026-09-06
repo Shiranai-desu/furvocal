@@ -5,14 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>落萤 & 沫眠 声库配布 | Virtual Singer Distribution</title>
     <style>
+        /* 简单样式，你可以自行美化 */
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .lang-box {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .lang-btn {
+            padding: 6px 14px;
+            margin-left: 8px;
+            border: 1px solid #ccc;
+            background: #fff;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            background: #4a90d9;
+            color: #fff;
+            border-color: #4a90d9;
+        }
+        h1 { text-align: center; color: #333; }
+        .card {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #4a90d9;
+        }
+        .card h2 { margin-top: 0; color: #2c3e50; }
+        .info-row { margin: 8px 0; color: #555; }
+        .rule-box {
+            background: #fff3cd;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 16px 0;
+            border-left: 4px solid #ffc107;
+        }
+        .mt-2 { margin-top: 6px; }
+        .download-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            margin: 8px 8px 0 0;
+            background: #4a90d9;
+            color: #fff;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .download-btn:hover {
+            background: #357abd;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        .jp, .en { display: none; }
+    </style>
 </head>
 <body>
     <div class="container">
         <!-- 语言切换 -->
         <div class="lang-box">
-            <button class="lang-btn active" onclick="changeLang('zh')">中文</button>
-            <button class="lang-btn" onclick="changeLang('jp')">日本語</button>
-            <button class="lang-btn" onclick="changeLang('en')">English</button>
+            <button class="lang-btn active" onclick="changeLang('zh', this)">中文</button>
+            <button class="lang-btn" onclick="changeLang('jp', this)">日本語</button>
+            <button class="lang-btn" onclick="changeLang('en', this)">English</button>
         </div>
 
         <!-- 标题 -->
@@ -103,34 +178,35 @@
     </div>
 
     <script>
-        // 三语切换逻辑
-        function changeLang(type) {
-            // 重置按钮选中
-            document.querySelectorAll('.lang-btn').forEach(btn=>{
-                btn.classList.remove('active');
-            })
-            event.target.classList.add('active');
+        // 三语切换逻辑（修复 event 问题）
+        function changeLang(type, btn) {
+            // 重置所有按钮状态
+            document.querySelectorAll('.lang-btn').forEach(b => {
+                b.classList.remove('active');
+            });
+            btn.classList.add('active');
 
             // 隐藏所有语言
-            document.querySelectorAll('.zh').forEach(el=>el.style.display='none');
-            document.querySelectorAll('.jp').forEach(el=>el.style.display='none');
-            document.querySelectorAll('.en').forEach(el=>el.style.display='none');
+            document.querySelectorAll('.zh').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.jp').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.en').forEach(el => el.style.display = 'none');
 
-            // 展示对应语言
-            if(type === 'zh'){
-                document.querySelectorAll('.zh').forEach(el=>el.style.display='inline');
+            // 显示目标语言
+            if (type === 'zh') {
+                document.querySelectorAll('.zh').forEach(el => el.style.display = 'inline');
                 document.title = "落萤&沫眠 虚拟歌姬声库配布";
-            }
-            if(type === 'jp'){
-                document.querySelectorAll('.jp').forEach(el=>el.style.display='inline');
+            } else if (type === 'jp') {
+                document.querySelectorAll('.jp').forEach(el => el.style.display = 'inline');
                 document.title = "落螢&沫眠 音源配布";
-            }
-            if(type === 'en'){
-                document.querySelectorAll('.en').forEach(el=>el.style.display='inline');
+            } else if (type === 'en') {
+                document.querySelectorAll('.en').forEach(el => el.style.display = 'inline');
                 document.title = "Luoying & Momian Voicebank Distribution";
             }
         }
+        // 默认显示中文（其实已经在CSS中隐藏了日英文，但为保证加载时正确）
+        window.onload = function() {
+            // 默认中文已可见，无需额外操作
+        };
     </script>
 </body>
 </html>
-            
